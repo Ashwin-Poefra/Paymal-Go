@@ -1,0 +1,9 @@
+version: "3"
+services:
+  postgresql:
+    image: postgres:alpine
+    volumes:
+      - paymal-postgresql:/var/lib/postgresql/data
+
+volumes:
+  paymal-postgresql:
