@@ -18,3 +18,8 @@ sqlc:
 
 dev:
 	docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+
+server:
+	go run main.go
+
+.PHONY: migrate-up migrate-down test sqlc dev server
