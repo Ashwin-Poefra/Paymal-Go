@@ -7,20 +7,19 @@ import (
 
 // Server serves HTTP requests
 type Server struct {
-	store  *db.Store
+	store  db.Store
 	router *gin.Engine
 }
 
 // Creates new HTTP server instance
-func NewServer(store *db.Store) *Server {
+func NewServer(store db.Store) *Server {
 	server := &Server{store: store}
 	router := gin.Default()
 
-	router.GET("api/accounts", server.listAccount)
-	router.POST("api/accounts", server.createAccount)
-	router.GET("api/accounts/:id", server.getAccount)
+	router.POST("/api/accounts", server.createAccount)
+	router.GET("/api/accounts/:id", server.getAccount)
+	router.GET("/api/accounts", server.listAccounts)
 
-	// Add routes to router
 	server.router = router
 	return server
 }

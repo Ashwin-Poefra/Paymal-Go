@@ -22,4 +22,7 @@ dev:
 server:
 	go run main.go
 
-.PHONY: migrate-up migrate-down test sqlc dev server
+mock:
+	mockgen -package mockdb -destination db/mock/store.go github.com/gyataro/paymal/db/sqlc Store
+
+.PHONY: migrate-up migrate-down test sqlc dev server mock
