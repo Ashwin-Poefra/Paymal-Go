@@ -1,6 +1,18 @@
-version: "3"
+version: "3.9"
 services:
-  postgresql:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: gyataro/paymal-api
+    depends_on:
+      - postgresql
+    entrypoint: [ "/app/wait-for.sh", "postgres:5432", "--", "/app/start.sh" ]
+    command: [ "/app/main" ]
+    environment:
+      - DB_SOURCE=postgresql://root:root@postgres:5432/paymal?sslmode=disable
+
+  postgres:
     image: postgres:alpine
     volumes:
       - paymal-postgresql:/var/lib/postgresql/data
